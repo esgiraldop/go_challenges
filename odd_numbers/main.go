@@ -3,6 +3,10 @@ package main
 import "fmt"
 
 func main() {
-	ans := newArray(1)
-	fmt.Println("ans: ", ans)
+	length, isValid := validateInput(10)
+	fmt.Println("isValid: ", isValid)
+	if isValid {
+		intArray := newArray(length)
+		checkEven(intArray)
+	}
 }

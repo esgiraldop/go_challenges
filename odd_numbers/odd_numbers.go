@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"math/rand"
 	"strconv"
 	"strings"
 )
@@ -12,7 +13,7 @@ func validateInput(num interface{}) (int, bool) {
 	switch v := num.(type) {
 	case string:
 		val, err := strconv.Atoi(v)
-		message.WriteString("It is a string")
+		message.WriteString(fmt.Sprintf("%d is a string", num))
 		if err != nil {
 			message.WriteString(", and cannot be converted to an integer.")
 			fmt.Println(message.String())
@@ -28,28 +29,33 @@ func validateInput(num interface{}) (int, bool) {
 			return val, true
 		}
 	case int:
-		message.WriteString("It is an integer.")
+		message.WriteString(fmt.Sprintf("%d is an integer", num))
 		fmt.Println(message.String())
 		return v, true
 	default:
-		message.WriteString("It is neither a string nor an integer.")
+		message.WriteString(fmt.Sprintf("%d is neither a string nor an integer.", num))
 		fmt.Println(message.String())
 		return 0, false
 	}
 }
 
-func newArray(inputLength interface{}) []int {
+func newArray(inputLength int) []int {
 	// Function that returns an array of length "length" with random integer numbers between 1 and 10. 1 < length <= 11
-	length, isValid := validateInput(inputLength)
-	fmt.Println("answer: ", length)
-	fmt.Println("isValid: ", isValid)
-	// if isValid {
-	// 	var intArray []int
+	var intArray []int
+	for i := 0; i < inputLength; i++ {
+		RandomIntegerwithinRange := rand.Intn(100-1) + 1
+		intArray = append(intArray, RandomIntegerwithinRange)
+	}
+	fmt.Println("The array is: ", intArray)
+	return intArray
+}
 
-	// 	for i := 0; i < length; i++ {
-
-	// 	}
-	// }
-	dummyArray := []int{1, 2}
-	return dummyArray
+func checkEven(intArray []int) {
+	for _, num := range intArray {
+		if num%2 == 0 {
+			fmt.Println(fmt.Sprintf("%d is even", num))
+		} else {
+			fmt.Println(fmt.Sprintf("%d is odd", num))
+		}
+	}
 }
